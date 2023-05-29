@@ -1,6 +1,7 @@
 import * as React from "react"
-import { HomePageDiv } from "../styles/homepageStyles"
-
+import "normalize.css"
 export default function Home() {
-  return <HomePageDiv>Hello world!</HomePageDiv>
+  return <div>
+    <h2>This is homepage</h2>
+  </div>
 }
