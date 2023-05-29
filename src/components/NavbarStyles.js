@@ -29,14 +29,16 @@ li {
         --rotate: 3deg;
     }
 }
-a {
+  a {
     font-size: 3rem;
     text-decoration: none;
 
     &:hover {
-        color: var(--red);
+      color: var(--red);
     }
-}
+
+
+  }
 
 .logo {
     transform: translateY(-25%);
