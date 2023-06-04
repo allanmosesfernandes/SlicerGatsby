@@ -1,12 +1,15 @@
 import React from 'react'
 import { graphql } from 'gatsby';
+import { GatsbyImage } from 'gatsby-plugin-image';
 
-const SinglePizza = ({data}) => {
+const SinglePizza = ({ data }) => {
   const pageData = data.sanityPizza;
   const {name, price} = pageData;
   return (
     <div>
-        <h2>{name}</h2>
+      <h2>{name}</h2>
+      <GatsbyImage image={pageData.image.asset.gatsbyImageData} alt={'asas'}/>
+
     </div>
   )
 }
@@ -18,6 +21,11 @@ query ($slug: String!) {
     name
     id 
     price
+    image {
+      asset {
+            gatsbyImageData(layout: CONSTRAINED, width: 900)
+          }
+        }
     toppings {
       name
     }
