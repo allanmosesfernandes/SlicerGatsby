@@ -22,7 +22,10 @@ async function turnPizzasIntoPages({ graphql, actions }) {
         console.log(`pizaa/${pizza.slug.current}`);
         actions.createPage({
             path: `pizza/${pizza.slug.current}`,
-            component: pizzaTemplate,
+            component: pizzaTemplate, 
+            context: {
+                slug: pizza.slug.current
+            }
         })
     });
 }
