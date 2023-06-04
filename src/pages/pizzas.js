@@ -1,11 +1,13 @@
 import { graphql } from 'gatsby'
 import React from 'react'
 import PizzaList from '../components/PizzaList';
+import ToppingsFilter from '../components/ToppingsFilter';
 
 const Pizzas = ({data}) => {
   const Pizzas = data.Pizza.nodes;
   return (
     <div>
+      <ToppingsFilter />
       <PizzaList pizzas={Pizzas} />
     </div>
   )
@@ -22,7 +24,7 @@ query MyQuery {
       slug {
         current
       }
-      topping {
+      toppings {
         name
       }
       image {
