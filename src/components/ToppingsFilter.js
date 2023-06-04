@@ -2,31 +2,31 @@ import { graphql, useStaticQuery } from 'gatsby'
 import React from 'react'
 
 const ToppingsFilter = () => {
-
-  const { toppings, pizza } = useStaticQuery(graphql`
-query MyQuery {
-  allSanityTopping {
-    nodes {
-      vegetarian
-      name
-      id
-    }
-  }
-  allSanityPizza {
-    nodes {
-      name
-      toppings {
-        name
+  //get a list of all toppings
+  const {pizzas, toppings} = useStaticQuery(graphql`
+  query ToppingQuery {
+    toppings: allSanityTopping {
+      nodes {
         id
+        name
+        vegetarian
       }
-      id
     }
-  }
-}`)
-
-
+    pizzas: allSanityPizza {
+      nodes {
+        id
+        name
+        toppings {
+          name
+          id
+        }
+      }
+    }
+  }`)
+  console.clear();
+  console.log({pizzas, toppings});
   return (
-    <div>
+    <div> 
       
     </div>
   )
