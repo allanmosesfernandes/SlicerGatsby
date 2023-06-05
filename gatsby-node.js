@@ -30,6 +30,33 @@ async function turnPizzasIntoPages({ graphql, actions }) {
     });
 }
 
+async function turnToppingsIntoPage ({ graphql, actions }) {
+    //--Get template--//
+    const pizzaTemplate = path.resolve("./src/templates/SinglePizza.js");
+
+    //--Query All Toppings--//
+    const { data } = await graphql`
+      query MyQuery {
+        Toppings: allSanityTopping {
+          nodes {
+            name
+            vegetarian
+            id
+          }
+        }
+      }
+    `;
+    
+    data.Toppings.node.forEach(topping => {
+        actions.createPage({
+            path: `topping/${topping.name}`,
+            component: pizzaTemplate,
+            context: {
+            id: topping.id
+            },
+        });
+    })
+}
 
 exports.createPages = async (params) => {
 
