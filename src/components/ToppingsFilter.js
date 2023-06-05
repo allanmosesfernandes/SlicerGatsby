@@ -45,7 +45,7 @@ const ToppingsFilter = ({activeTopping}) => {
       background: white;
       padding: 2px 5px;
     }
-    &.active {
+    &[aria-current="page"] {
       background: var(--yellow);
     }
   }
@@ -80,6 +80,10 @@ const ToppingsFilter = ({activeTopping}) => {
   const tooppingsWithCount = countPizzasInToppings(pizzas.nodes);
   return (
     <ToppingStyles> 
+        <Link to={`/pizzas` }>
+          <span className='name'>All Pizzas</span>
+          <span className='count'>{pizzas.nodes.length}</span>
+        </Link>
         {
           tooppingsWithCount.map((topping) => (
           <Link to={`/topping/${topping.name}`} key={topping.id} className={topping.name === activeTopping ? "active" : ""} >
