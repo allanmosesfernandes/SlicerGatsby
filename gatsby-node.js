@@ -19,7 +19,7 @@ async function turnPizzasIntoPages({ graphql, actions }) {
     
     //3. Loop over each pizza and create a page for that pizza
     data.Pizzas.nodes.forEach(pizza => {
-        console.log(`pizaa/${pizza.slug.current}`);
+        // console.log(`pizaa/${pizza.slug.current}`);
         actions.createPage({
             path: `pizza/${pizza.slug.current}`,
             component: pizzaTemplate, 
@@ -30,6 +30,34 @@ async function turnPizzasIntoPages({ graphql, actions }) {
     });
 }
 
+async function fetchBeersAndTurnIntoNodes( actions, createContentDigest, createNodeId) {
+    console.log('Turn beers into Nodes');
+    //1. fetch a list of beers
+    const response = await fetch('https://api.punkapi.com/v2/beers');
+    const beers = await response.json();
+    console.log(responseJSON);
+    //2. Loop over each one
+    for (const beer of beers) {
+        const nodeMeta = {
+            id: createNodeId(`beer-${beer.name}`),
+            parent: null,
+            children: [],
+            internal: {
+                type: 'Beer',
+                mediaType: 'application/json',
+                contentDigest: createContentDigest(beer),
+            }
+        }
+    //3. Create a node for the beers
+        actions.createNode({...beer, ...nodeMeta})
+    }
+    
+}
+
+exports.sourceNodes = async (params) => {
+  // Your code for sourcing nodes
+  await Promise.all([fetchBeersAndTurnIntoNodes(params)]);
+};
 async function turnToppingsIntoPage ({ graphql, actions }) {
     //--Get template--//
     const toppingsTemplate = path.resolve("./src/pages/pizzas.js");
