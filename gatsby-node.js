@@ -30,12 +30,12 @@ async function turnPizzasIntoPages({ graphql, actions }) {
     });
 }
 
-async function fetchBeersAndTurnIntoNodes( actions, createContentDigest, createNodeId) {
+async function fetchBeersAndTurnIntoNodes({actions, createContentDigest, createNodeId}) {
     console.log('Turn beers into Nodes');
     //1. fetch a list of beers
     const response = await fetch('https://api.punkapi.com/v2/beers');
     const beers = await response.json();
-    console.log(responseJSON);
+    // console.log(responseJSON);
     //2. Loop over each one
     for (const beer of beers) {
         const nodeMeta = {
