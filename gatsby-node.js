@@ -37,6 +37,6 @@ exports.createPages = async (params) => {
     //1.Pizzas
     await turnPizzasIntoPages(params)
     //2.Toppings
-    //3.SliceMasters
+    // 3.SliceMasters
 
 }
