@@ -37,6 +37,4 @@ query MyQuery($topping: [String]) {
       }
     }
   }
-
-
 `
