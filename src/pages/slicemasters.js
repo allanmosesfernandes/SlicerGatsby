@@ -34,10 +34,11 @@ img {
   width: 100%;
 }
 `
-const Slicemasters = ({ data }) => {
-  
+const Slicemasters = ({ data, pageContext }) => {
+  console.log(pageContext);
+  const {currentPage,pageSize, skip} = pageContext;
   const slicersArray = data.allSanityPerson.edges;
-  
+  // console.log(currentPage,pageSize, skip);
   return <SlicerGrid>
     {
       slicersArray.map((slicer,index) => {
@@ -54,14 +55,13 @@ const Slicemasters = ({ data }) => {
         );
       })
     }
-
   </SlicerGrid>;
 }
 
 export default Slicemasters
 export const query = graphql`
-  query MyQuery {
-    allSanityPerson(limit: 4, skip: 4)  {
+  query MyQuery($skip: Int = 0, $pageSize: Int = 4) {
+    allSanityPerson (limit: $pageSize, skip: $skip){
       edges {
         node {
           id
