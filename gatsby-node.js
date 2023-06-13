@@ -33,23 +33,38 @@ async function turnPizzasIntoPages({ graphql, actions }) {
 //== Turn Slicemasters into pages ==//
 async function turnSliceMastersIntoPages({ graphql, actions }) {
   //1. Query all Slicemasters
-  console.log('dfdfdfdfdf')
-//   const { data } = await graphql(`
-//     query MyQuery {
-//       allSanityPerson {
-//         totalCount
-//         nodes {
-//           slug {
-//             current
-//           }
-//           id
-//           name
-//         }
-//       }
-//     }
-//   `);
-//   console.log(data);
+  const { data } = await graphql(`
+    query MyQuery {
+      allSanityPerson {
+        totalCount
+        nodes {
+          slug {
+            current
+          }
+          id
+          name
+        }
+      }
+    }
+  `);
+  console.log(process.env.GATSBY_PAGE_SIZE);
   //2. Figure out how many pages are there
+  const pageSize = parseInt(process.env.GATSBY_PAGE_SIZE);
+  const totalSlicers = data.allSanityPerson.totalCount;
+  const totalPaths = Math.ceil(totalSlicers / pageSize);
+  //3. Loop over total paths and create that many pages
+
+  Array.from({length: totalPaths}).forEach((_,index) => {
+    actions.createPage({
+      path: `slicemaster/${index + 1}`,
+      component: path.resolve('./src/pages/slicemasters.js'),
+      context: {
+        skip: index * pageSize,
+        currentPage: index + 1,
+        pageSize,
+      },
+    })
+  })
 }
 
 async function fetchBeersAndTurnIntoNodes({
