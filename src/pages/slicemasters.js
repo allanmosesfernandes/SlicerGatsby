@@ -61,7 +61,7 @@ const Slicemasters = ({ data }) => {
 export default Slicemasters
 export const query = graphql`
   query MyQuery {
-    allSanityPerson {
+    allSanityPerson(limit: 4, skip: 4)  {
       edges {
         node {
           id

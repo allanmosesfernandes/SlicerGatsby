@@ -53,10 +53,9 @@ async function turnSliceMastersIntoPages({ graphql, actions }) {
   const totalSlicers = data.allSanityPerson.totalCount;
   const totalPaths = Math.ceil(totalSlicers / pageSize);
   //3. Loop over total paths and create that many pages
-
   Array.from({length: totalPaths}).forEach((_,index) => {
     actions.createPage({
-      path: `slicemaster/${index + 1}`,
+      path: `slicemasters/${index + 1}`,
       component: path.resolve('./src/pages/slicemasters.js'),
       context: {
         skip: index * pageSize,
