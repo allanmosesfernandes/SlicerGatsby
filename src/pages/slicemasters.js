@@ -10,6 +10,21 @@ const SlicerGrid = styled.div`
 display: grid;
 grid-template-columns: 1fr 1fr 1fr;
 gap: 2rem;
+h2 {
+  text-align: center;
+  transform: rotate(2deg);
+  position: relative;
+  z-index: 2;
+  margin-bottom: -2rem; 
+}
+
+.description {
+  background: var(--yellow);
+  padding: 1rem;
+  margin: 2rem;
+  margin-top: -6rem;
+  transform: rotate(2deg);
+}   
 .gatsby-image-wrapper {
   width: 100%;
 }
@@ -32,9 +47,9 @@ const Slicemasters = ({ data }) => {
 
         return (
           <div key={id}>
-            <h2>{name}</h2>
+            <h2><span className='mark'>{name}</span></h2>
             <GatsbyImage image={image} alt={name} />
-            <p>{description}</p>
+            <p className='description'>{description}</p>
           </div>
         );
       })
